@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Loading from "./components/Loading";
-import Data from "./components/Data";
+import Simpsons from "./components/Simpsons";
+import "./App.css";
 
 class App extends Component {
   state = {};
@@ -9,19 +10,13 @@ class App extends Component {
     const { data } = await axios.get(
       `https://thesimpsonsquoteapi.glitch.me/quotes?count=5`
     );
-    this.setState({ data });
+    this.setState({ simpsons: data });
   }
 
   render() {
-    if (!this.state.data) return <p>Loading...</p>;
-    return (
-      <ol>
-        {this.state.data.map((item) => {
-          return <li>{item.character}</li>;
-        })}
-      </ol>
-    );
+    const { simpsons } = this.state;
+    if (!simpsons) return <Loading />;
+    return <Simpsons simpsons={simpsons} />;
   }
 }
-
 export default App;
