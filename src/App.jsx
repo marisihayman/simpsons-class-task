@@ -16,7 +16,12 @@ class App extends Component {
   render() {
     const { simpsons } = this.state;
     if (!simpsons) return <Loading />;
-    return <Simpsons simpsons={simpsons} />;
+    return (
+      <>
+        <h1>Total no of liked chars #</h1>
+        <Simpsons simpsons={simpsons} />
+      </>
+    );
   }
 }
 export default App;
