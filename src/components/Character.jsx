@@ -10,11 +10,25 @@ class Character extends Component {
     this.setState({ like: !this.state.like });
   };
 
-  charIndexView;
-
   render() {
-    const { character, quote, image, id } = this.props.item;
+    console.log(this.state.like);
+    const { character, quote, image, id, characterDirection } = this.props.item;
     const { like } = this.state;
+    if (characterDirection === "Left") {
+      return (
+        <div className="characterCotainer">
+          <Name
+            character={character}
+            like={this.state.like}
+            onLikeToggle={this.onLikeToggle}
+            id={id}
+          />
+          <Image image={image} like={like} />
+          <Quote quote={quote} />
+          <Delete onDelete={this.props.onDelete} quote={quote} id={id} />
+        </div>
+      );
+    }
 
     return (
       <div className="characterCotainer">
@@ -24,7 +38,7 @@ class Character extends Component {
           onLikeToggle={this.onLikeToggle}
         />
         <Quote quote={quote} />
-        <Image image={image} like={like} />
+        <Image image={image} like={this.state.like} />
         <Delete onDelete={this.props.onDelete} quote={quote} id={id} />
       </div>
     );

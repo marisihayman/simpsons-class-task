@@ -18,6 +18,14 @@ class App extends Component {
     this.setState({ simpsons: data });
   }
 
+  onLikeToggle = (id) => {
+    const indexOf = this.state.simpsons.findIndex((char) => {
+      return char.id === id;
+    });
+    const simpsons = [...this.state.simpsons];
+    simpsons[indexOf].like = true;
+  };
+
   onDelete = (id) => {
     const indexOf = this.state.simpsons.findIndex((char) => {
       return char.id === id;
@@ -34,7 +42,11 @@ class App extends Component {
     return (
       <>
         <h1>Total no of liked chars #</h1>
-        <Simpsons simpsons={simpsons} onDelete={this.onDelete} />
+        <Simpsons
+          simpsons={simpsons}
+          onDelete={this.onDelete}
+          onLikeToggle={this.onLikeToggle}
+        />
       </>
     );
   }
